@@ -1,0 +1,90 @@
+{
+    "helloWorld": "Hello World!",
+    "@helloWorld": {
+      "description": "The conventional newborn programmer greeting"
+    },
+    "nowDateTime" : "{day} {time}",
+    "@nowDateTime" : {
+      "placeholders" : {
+        "day" : {
+          "type" : "DateTime",
+          "format" : "E"
+        },
+        "time" : {
+          "type" : "DateTime",
+          "format" : "Hm"
+        }
+      }
+    },
+    "thunderstorm": "Thunderstorm",
+    "drizzle": "Drizzle",
+    "rain": "Rain",
+    "snow": "Snow",
+    "mist": "Mist",
+    "smoke": "Smoke",
+    "haze": "Haze",
+    "dust": "Dust",
+    "fog": "Fog",
+    "sand": "Sand",
+    "ash": "Ash",
+    "squall": "Squall",
+    "tornado": "Tornado",
+    "clear": "Clear",
+    "clouds": "Clouds",
+    "feelsLike": "feels like",
+    "hourlyForecast" : "Hourly forecast",
+    "dailyForecast" : "Daily forecast",
+    "windAndPressure" : "Wind and pressure",
+    "details" : "Details",
+    "humidity" : "Humidity",
+    "uvIndex" : "UV-index",
+    "visibility" : "Visibility",
+    "dewPoint" : "Dew point",
+    "search" : "Search...",
+    "highTemp" : "High",
+    "lowTemp" : "Low",
+    "pressure" : "Pressure",
+    "mbar" : "mbar",
+    "ms" : "m/s",
+    "km" : "km",
+    "low" : "Low",
+    "moderate" : "Moderate",
+    "high" : "High",
+    "veryHigh" : "Very high",
+    "extreme" : "Extreme",
+    "sw" : "SW",
+    "w" : "W",
+    "nw" : "NW",
+    "n" : "N",
+    "ne" : "NE",
+    "e" : "E",
+    "se" : "SE",
+    "s" : "S",
+    "dayOfWeek" : "{day}",
+    "@dayOfWeek" : {
+      "placeholders" : {
+        "day" : {
+          "type" : "DateTime",
+          "format" : "E"
+        }
+      }
+    },
+    "monthAndDay" : "{day}",
+    "@monthAndDay" : {
+      "placeholders" : {
+        "day" : {
+          "type" : "DateTime",
+          "format" : "MMMd"
+        }
+      }
+    },
+    "nBeauforts": "{count,plural, =1{{count} Beaufort} other{{count} Beauforts}}",
+    "@nBeauforts": {
+      "description": "A plural message",
+      "placeholders": {
+        "count": {
+          "type" : "int"
+        }
+      }
+    }
+}

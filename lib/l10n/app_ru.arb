@@ -1,0 +1,90 @@
+{
+    "helloWorld": "Привет, мир!",
+    "@helloWorld": {
+      "description": "The conventional newborn programmer greeting"
+    },
+    "nowDateTime" : "{day} {time}",
+    "@nowDateTime" : {
+      "placeholders" : {
+        "day" : {
+          "type" : "DateTime",
+          "format" : "E"
+        },
+        "time" : {
+          "type" : "DateTime",
+          "format" : "Hm"
+        }
+      }
+    },
+    "thunderstorm": "Гроза",
+    "drizzle": "Мелкий дождь",
+    "rain": "Дождь",
+    "snow": "Снег",
+    "mist": "Туман",
+    "smoke": "Дым",
+    "haze": "Мгла",
+    "dust": "Пыль",
+    "fog": "Туман",
+    "sand": "Песок",
+    "ash": "Пепел",
+    "squall": "Шквал",
+    "tornado": "Торнадо",
+    "clear": "Ясно",
+    "clouds": "Облачно",
+    "feelsLike": "по ощущениям",
+    "hourlyForecast" : "Почасовой прогноз",
+    "dailyForecast" : "Ежедневный прогноз",
+    "windAndPressure" : "Ветер и давление",
+    "details" : "Детали",
+    "humidity" : "Влажность",
+    "uvIndex" : "УФ-индекс",
+    "visibility" : "Видимость",
+    "dewPoint" : "Точка росы",
+    "search" : "Поиск...",
+    "highTemp" : "Макс",
+    "lowTemp" : "Мин",
+    "pressure" : "Давление",
+    "mbar" : "мбар",
+    "ms" : "м/с",
+    "km" : "км",
+    "low" : "Низкий",
+    "moderate" : "Умеренный",
+    "high" : "Высокий",
+    "veryHigh" : "Очень высокий",
+    "extreme" : "Экстремальный",
+    "sw" : "ЮЗ",
+    "w" : "З",
+    "nw" : "СЗ",
+    "n" : "С",
+    "ne" : "СВ",
+    "e" : "В",
+    "se" : "ЮВ",
+    "s" : "Ю",
+    "dayOfWeek" : "{day}",
+    "@dayOfWeek" : {
+      "placeholders" : {
+        "day" : {
+          "type" : "DateTime",
+          "format" : "E"
+        }
+      }
+    },
+    "monthAndDay" : "{day}",
+    "@monthAndDay" : {
+      "placeholders" : {
+        "day" : {
+          "type" : "DateTime",
+          "format" : "MMMd"
+        }
+      }
+    },
+    "nBeauforts": "{count,plural, =1{{count} Бофорт} few{{count} Бофорта}} other{{count} Бофортов}}",
+    "@nBeauforts": {
+      "description": "A plural message",
+      "placeholders": {
+        "count": {
+          "type" : "int"
+        }
+      }
+    }
+}

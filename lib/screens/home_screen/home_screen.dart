@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         centerTitle: true,
-        foregroundColor: Colors.black,
+        foregroundColor: Theme.of(context).iconTheme.color,
         title: StreamBuilder<String>(
           stream: _cubit.cityNameStream,
           builder: (context, snapshot) {
@@ -46,16 +46,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     snapshot.data ?? "",
                     style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     AppLocalizations.of(context)!.nowDateTime(
                       DateTime.now(),
                       DateTime.now(),
                     ),
-                    style: const TextStyle(fontSize: 12, color: Colors.black),
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
                 ],
               );
@@ -68,7 +70,6 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(
               Icons.search,
-              color: Colors.black,
               size: 30.0,
             ),
             onPressed: () {
@@ -253,6 +254,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Transform.rotate(
                                       child: Image.asset(
                                         'assets/down-arrow.png',
+                                        color: Theme.of(context)
+                                            .iconTheme
+                                            .color!
+                                            .withOpacity(0.8),
                                       ),
                                       angle:
                                           vector.radians(info.current.windDeg),
@@ -273,9 +278,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                           info.current.windDeg,
                                           context,
                                         ),
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.black54),
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Theme.of(context)
+                                              .iconTheme
+                                              .color!
+                                              .withOpacity(0.54),
+                                        ),
                                       ),
                                       Text(
                                         "${info.current.windSpeed.toString()} ${AppLocalizations.of(context)!.ms}",
@@ -304,9 +313,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Text(
                                         AppLocalizations.of(context)!.pressure,
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.black54),
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Theme.of(context)
+                                              .iconTheme
+                                              .color!
+                                              .withOpacity(0.54),
+                                        ),
                                       ),
                                       Image.asset(
                                         'assets/barometer.png',
@@ -364,7 +377,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   DateFormat.Hm().format(
                     DateTime.fromMillisecondsSinceEpoch(hourly[i].dt * 1000),
                   ),
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Theme.of(context).iconTheme.color!.withOpacity(0.54),
+                  ),
                 ),
               ),
               Padding(

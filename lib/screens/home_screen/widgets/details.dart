@@ -83,9 +83,11 @@ class DetailsWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: DottedLine(),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: DottedLine(
+                        dashColor: Theme.of(context).iconTheme.color!,
+                      ),
                     ),
                     Tooltip(
                       message: uvi(
@@ -121,9 +123,11 @@ class DetailsWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: DottedLine(),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: DottedLine(
+                        dashColor: Theme.of(context).iconTheme.color!,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8),
@@ -133,12 +137,14 @@ class DetailsWidget extends StatelessWidget {
                           Row(
                             children: [
                               Padding(
-                                  padding: const EdgeInsets.only(right: 5),
-                                  child: Image.asset(
-                                    'assets/eye.png',
-                                    height: 16,
-                                    width: 16,
-                                  )),
+                                padding: const EdgeInsets.only(right: 5),
+                                child: Image.asset(
+                                  'assets/eye.png',
+                                  height: 16,
+                                  width: 16,
+                                  color: Theme.of(context).iconTheme.color,
+                                ),
+                              ),
                               Text(
                                 AppLocalizations.of(context)!.visibility,
                                 style: const TextStyle(fontSize: 16),
@@ -152,9 +158,11 @@ class DetailsWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: DottedLine(),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: DottedLine(
+                        dashColor: Theme.of(context).iconTheme.color!,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8),
@@ -169,6 +177,7 @@ class DetailsWidget extends StatelessWidget {
                                   'assets/dew_point.png',
                                   height: 16,
                                   width: 16,
+                                  color: Theme.of(context).iconTheme.color,
                                 ),
                               ),
                               Text(
@@ -184,9 +193,11 @@ class DetailsWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: DottedLine(),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: DottedLine(
+                        dashColor: Theme.of(context).iconTheme.color!,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8),

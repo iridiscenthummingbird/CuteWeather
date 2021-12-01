@@ -51,7 +51,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Material(
-                      color: Colors.white,
+                      color: Theme.of(context).cardColor,
                       elevation: 0.0,
                       child: ListTile(
                         leading: Image.asset(

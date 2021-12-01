@@ -3,6 +3,7 @@ import 'package:cute_weather_v2/repositories/api_repository.dart';
 import 'package:cute_weather_v2/repositories/shared_prefs_repository.dart';
 import 'package:cute_weather_v2/screens/home_screen/cubit/home_cubit.dart';
 import 'package:cute_weather_v2/screens/home_screen/home_screen.dart';
+import 'package:cute_weather_v2/themes/my_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,9 +23,9 @@ class MyApp extends StatelessWidget {
         ),
         child: MaterialApp(
           title: 'Cute Weather',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          themeMode: ThemeMode.system,
+          theme: MyThemes.lightTheme,
+          darkTheme: MyThemes.darkTheme,
           debugShowCheckedModeBanner: false,
           home: const HomeScreen(),
           localizationsDelegates: const [

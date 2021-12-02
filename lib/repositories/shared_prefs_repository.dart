@@ -1,5 +1,6 @@
 import 'package:cute_weather_v2/managers/shared_prefs_manager.dart';
 import 'package:cute_weather_v2/models/saved_prefs.dart';
+import 'package:flutter/material.dart';
 
 abstract class ISharedPreferencesRepository {
   final ISharedPreferencesManager sharedPreferencesManager;
@@ -8,6 +9,9 @@ abstract class ISharedPreferencesRepository {
 
   void setPrefs(SavedPrefs prefs);
   SavedPrefs getPrefs();
+
+  void setTheme(ThemeMode themeMode);
+  ThemeMode getTheme();
 }
 
 class SharedPreferencesRepository extends ISharedPreferencesRepository {
@@ -23,5 +27,15 @@ class SharedPreferencesRepository extends ISharedPreferencesRepository {
   @override
   void setPrefs(SavedPrefs prefs) {
     sharedPreferencesManager.setPrefs(prefs);
+  }
+
+  @override
+  ThemeMode getTheme() {
+    return sharedPreferencesManager.getTheme();
+  }
+
+  @override
+  void setTheme(ThemeMode themeMode) {
+    sharedPreferencesManager.setTheme(themeMode);
   }
 }

@@ -3,6 +3,7 @@ import 'package:cute_weather_v2/models/hourly.dart';
 import 'package:cute_weather_v2/models/info.dart';
 import 'package:cute_weather_v2/screens/home_screen/cubit/home_cubit.dart';
 import 'package:cute_weather_v2/screens/home_screen/widgets/details.dart';
+import 'package:cute_weather_v2/screens/home_screen/widgets/theme_switcher.dart';
 import 'package:cute_weather_v2/screens/search_screen/search_screen.dart';
 import 'package:cute_weather_v2/services/getter_main_string.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,29 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 50.0),
+          child: Column(
+            children: [
+              const Text(
+                "Cute Weather",
+                style: TextStyle(fontSize: 24),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(AppLocalizations.of(context)!.darkTheme),
+                  const ThemeSwitcher(),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,

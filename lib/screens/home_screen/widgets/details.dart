@@ -53,48 +53,11 @@ class DetailsWidget extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 5),
-                                child: Image.asset(
-                                  'assets/humidity.png',
-                                  height: 16,
-                                  width: 16,
-                                ),
-                              ),
-                              Text(
-                                AppLocalizations.of(context)!.humidity,
-                                style: const TextStyle(fontSize: 16),
-                              )
-                            ],
-                          ),
-                          Text(
-                            "${info.current.humidity.toString()}%",
-                            style: const TextStyle(fontSize: 16),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: DottedLine(
-                        dashColor: Theme.of(context).iconTheme.color!,
-                      ),
-                    ),
-                    Tooltip(
-                      message: uvi(
-                        info.current.uvi.round(),
-                        context,
-                      ),
-                      child: Padding(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Column(
+                    children: [
+                      Padding(
                         padding: const EdgeInsets.all(8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -104,133 +67,173 @@ class DetailsWidget extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(right: 5),
                                   child: Image.asset(
-                                    'assets/sun.png',
+                                    'assets/humidity.png',
                                     height: 16,
                                     width: 16,
                                   ),
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!.uvIndex,
+                                  AppLocalizations.of(context)!.humidity,
                                   style: const TextStyle(fontSize: 16),
                                 )
                               ],
                             ),
                             Text(
-                              info.current.uvi.toString(),
+                              "${info.current.humidity.toString()}%",
                               style: const TextStyle(fontSize: 16),
                             )
                           ],
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: DottedLine(
-                        dashColor: Theme.of(context).iconTheme.color!,
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: DottedLine(
+                          dashColor: Theme.of(context).iconTheme.color!,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
+                      Tooltip(
+                        message: uvi(
+                          info.current.uvi.round(),
+                          context,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 5),
-                                child: Image.asset(
-                                  'assets/eye.png',
-                                  height: 16,
-                                  width: 16,
-                                  color: Theme.of(context).iconTheme.color,
-                                ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 5),
+                                    child: Image.asset(
+                                      'assets/sun.png',
+                                      height: 16,
+                                      width: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    AppLocalizations.of(context)!.uvIndex,
+                                    style: const TextStyle(fontSize: 16),
+                                  )
+                                ],
                               ),
                               Text(
-                                AppLocalizations.of(context)!.visibility,
+                                info.current.uvi.toString(),
                                 style: const TextStyle(fontSize: 16),
                               )
                             ],
                           ),
-                          Text(
-                            "${info.current.visibility / 1000} ${AppLocalizations.of(context)!.km}",
-                            style: const TextStyle(fontSize: 16),
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: DottedLine(
-                        dashColor: Theme.of(context).iconTheme.color!,
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: DottedLine(
+                          dashColor: Theme.of(context).iconTheme.color!,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 5),
-                                child: Image.asset(
-                                  'assets/dew_point.png',
-                                  height: 16,
-                                  width: 16,
-                                  color: Theme.of(context).iconTheme.color,
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 5),
+                                  child: Image.asset(
+                                    'assets/eye.png',
+                                    height: 16,
+                                    width: 16,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                AppLocalizations.of(context)!.dewPoint,
-                                style: const TextStyle(fontSize: 16),
-                              )
-                            ],
-                          ),
-                          Text(
-                            "${info.current.dewPoint.round()}°",
-                            style: const TextStyle(fontSize: 16),
-                          )
-                        ],
+                                Text(
+                                  AppLocalizations.of(context)!.visibility,
+                                  style: const TextStyle(fontSize: 16),
+                                )
+                              ],
+                            ),
+                            Text(
+                              "${info.current.visibility / 1000} ${AppLocalizations.of(context)!.km}",
+                              style: const TextStyle(fontSize: 16),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: DottedLine(
-                        dashColor: Theme.of(context).iconTheme.color!,
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: DottedLine(
+                          dashColor: Theme.of(context).iconTheme.color!,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 5),
-                                child: Image.asset(
-                                  'assets/03d.png',
-                                  height: 16,
-                                  width: 16,
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 5),
+                                  child: Image.asset(
+                                    'assets/dew_point.png',
+                                    height: 16,
+                                    width: 16,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                AppLocalizations.of(context)!.clouds,
-                                style: const TextStyle(fontSize: 16),
-                              )
-                            ],
-                          ),
-                          Text(
-                            "${info.current.clouds}%",
-                            style: const TextStyle(fontSize: 16),
-                          )
-                        ],
+                                Text(
+                                  AppLocalizations.of(context)!.dewPoint,
+                                  style: const TextStyle(fontSize: 16),
+                                )
+                              ],
+                            ),
+                            Text(
+                              "${info.current.dewPoint.round()}°",
+                              style: const TextStyle(fontSize: 16),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: DottedLine(
+                          dashColor: Theme.of(context).iconTheme.color!,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 5),
+                                  child: Image.asset(
+                                    'assets/03d.png',
+                                    height: 16,
+                                    width: 16,
+                                  ),
+                                ),
+                                Text(
+                                  AppLocalizations.of(context)!.clouds,
+                                  style: const TextStyle(fontSize: 16),
+                                )
+                              ],
+                            ),
+                            Text(
+                              "${info.current.clouds}%",
+                              style: const TextStyle(fontSize: 16),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 flex: 2,
-              )
+              ),
             ],
           ),
         ),

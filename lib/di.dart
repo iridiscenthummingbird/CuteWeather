@@ -4,10 +4,14 @@ import 'package:cute_weather_v2/repositories/api_repository.dart';
 import 'package:cute_weather_v2/repositories/shared_prefs_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DI extends StatefulWidget {
-  const DI({Key? key, required this.child}) : super(key: key);
+  const DI({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
   final Widget child;
 
   @override

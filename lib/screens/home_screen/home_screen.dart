@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Padding(
           padding: const EdgeInsets.only(top: 50.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const Text(
                 "Cute Weather",
@@ -51,6 +52,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(AppLocalizations.of(context)!.darkTheme),
                   const ThemeSwitcher(),
                 ],
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                      "${AppLocalizations.of(context)!.createdBy}: @iridiscenthummingbird"),
+                ),
+              ),
+              const SizedBox(
+                height: 22,
               ),
             ],
           ),
@@ -93,6 +104,17 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             icon: const Icon(
+              Icons.location_on_outlined,
+              size: 30.0,
+            ),
+            onPressed: () {
+              _cubit.getInfoFromCoords(
+                AppLocalizations.of(context)!.localeName,
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(
               Icons.search,
               size: 30.0,
             ),
@@ -105,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     _cubit.getData(AppLocalizations.of(context)!.localeName),
               );
             },
-          )
+          ),
         ],
       ),
       body: RefreshIndicator(

@@ -12,6 +12,11 @@ abstract class IApiRepository {
 
   Future<Info> getInfo(SavedPrefs savedPrefs, [String lang = "en"]);
   Future<City?> getCity(String cityName, [String lang = "en"]);
+  Future<City?> getCityFromCoords(
+    double lon,
+    double lat, [
+    String lang = "en",
+  ]);
 }
 
 class ApiRepository extends IApiRepository {
@@ -33,5 +38,17 @@ class ApiRepository extends IApiRepository {
     var body = await apiManager.getInfo(lang, savedPrefs);
     var parsed = jsonDecode(body);
     return Info.fromJson(parsed);
+  }
+
+  @override
+  Future<City?> getCityFromCoords(double lon, double lat,
+      [String lang = "en"]) async {
+    var body = await apiManager.getCityFromCoords(lon, lat, lang);
+    if (body != null) {
+      var parsed = jsonDecode(body);
+      return City.fromJson(parsed);
+    } else {
+      return null;
+    }
   }
 }

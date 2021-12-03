@@ -87,5 +87,6 @@
         }
       }
     },
-    "darkTheme" : "Dark Theme"
+    "darkTheme" : "Dark Theme",
+    "createdBy" : "Created by"
 }

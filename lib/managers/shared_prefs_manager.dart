@@ -1,5 +1,6 @@
 import 'package:cute_weather_v2/models/saved_prefs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ISharedPreferencesManager {
@@ -38,7 +39,13 @@ class SharedPreferencesManager extends ISharedPreferencesManager {
   ThemeMode getTheme() {
     var theme = sharedPreferences.getString("theme");
     if (theme == null) {
-      return ThemeMode.system;
+      var brightness = SchedulerBinding.instance!.window.platformBrightness;
+      bool isDarkMode = brightness == Brightness.dark;
+      if (isDarkMode) {
+        return ThemeMode.dark;
+      } else {
+        return ThemeMode.light;
+      }
     } else if (theme == "dark") {
       return ThemeMode.dark;
     } else {

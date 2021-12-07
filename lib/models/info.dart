@@ -6,11 +6,12 @@ class Info {
   final Current current;
   final List<Hourly> hourly;
   final List<Daily> daily;
-
+  final int timezoneOffset;
   Info(
     this.current,
     this.hourly,
     this.daily,
+    this.timezoneOffset,
   );
 
   factory Info.fromJson(Map<String, dynamic> json) {
@@ -18,6 +19,7 @@ class Info {
       Current.fromJson(json['current']),
       json['hourly'].map<Hourly>((json) => Hourly.fromJson(json)).toList(),
       json['daily'].map<Daily>((json) => Daily.fromJson(json)).toList(),
+      json['timezone_offset'] as int,
     );
   }
 }

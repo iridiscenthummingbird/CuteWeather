@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cute_weather_v2/models/city.dart';
+import 'package:cute_weather_v2/models/cityname_and_offset.dart';
 import 'package:cute_weather_v2/models/info.dart';
 import 'package:cute_weather_v2/models/saved_prefs.dart';
 import 'package:cute_weather_v2/repositories/api_repository.dart';
@@ -21,9 +22,9 @@ class HomeCubit extends Cubit<HomeState> {
   final IApiRepository apiRepository;
   final ISharedPreferencesRepository sharedPreferencesRepository;
 
-  final StreamController<String> _cityNameStreamController =
-      StreamController<String>();
-  Stream<String> get cityNameStream => _cityNameStreamController.stream;
+  final StreamController<CityNameAndOffset> _cityStreamController =
+      StreamController<CityNameAndOffset>();
+  Stream<CityNameAndOffset> get cityStream => _cityStreamController.stream;
 
   final StreamController<Info> _infoStreamController = StreamController<Info>();
   Stream<Info> get infoStream => _infoStreamController.stream;
@@ -31,7 +32,10 @@ class HomeCubit extends Cubit<HomeState> {
   void getData([String lang = 'en']) async {
     SavedPrefs prefs = sharedPreferencesRepository.getPrefs();
     _infoStreamController.add(await apiRepository.getInfo(prefs, lang));
-    _cityNameStreamController.add(prefs.cityName);
+    _cityStreamController.add(CityNameAndOffset(
+      prefs.cityName,
+      prefs.offset,
+    ));
   }
 
   Future<City?> findCity(String cityName, [String lang = "en"]) async {
@@ -44,6 +48,7 @@ class HomeCubit extends Cubit<HomeState> {
         cityName: city.name,
         lon: city.lon,
         lat: city.lat,
+        offset: city.timezoneOffset,
       ),
     );
   }

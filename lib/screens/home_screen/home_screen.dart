@@ -1,3 +1,4 @@
+import 'package:cute_weather_v2/models/cityname_and_offset.dart';
 import 'package:cute_weather_v2/models/daily.dart';
 import 'package:cute_weather_v2/models/hourly.dart';
 import 'package:cute_weather_v2/models/info.dart';
@@ -5,6 +6,7 @@ import 'package:cute_weather_v2/screens/home_screen/cubit/home_cubit.dart';
 import 'package:cute_weather_v2/screens/home_screen/widgets/details.dart';
 import 'package:cute_weather_v2/screens/home_screen/widgets/theme_switcher.dart';
 import 'package:cute_weather_v2/screens/search_screen/search_screen.dart';
+import 'package:cute_weather_v2/services/date_time_converter.dart';
 import 'package:cute_weather_v2/services/getter_main_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,14 +74,14 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0.0,
         centerTitle: true,
         foregroundColor: Theme.of(context).iconTheme.color,
-        title: StreamBuilder<String>(
-          stream: _cubit.cityNameStream,
+        title: StreamBuilder<CityNameAndOffset>(
+          stream: _cubit.cityStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(
                 children: [
                   Text(
-                    snapshot.data ?? "",
+                    snapshot.data!.name,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -87,8 +89,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Text(
                     AppLocalizations.of(context)!.nowDateTime(
-                      DateTime.now(),
-                      DateTime.now(),
+                      DateTimeConverter.convert(
+                        DateTime.now().millisecondsSinceEpoch ~/ 1000,
+                        snapshot.data!.offset,
+                      ),
+                      DateTimeConverter.convert(
+                        DateTime.now().millisecondsSinceEpoch ~/ 1000,
+                        snapshot.data!.offset,
+                      ),
                     ),
                     style: const TextStyle(
                       fontSize: 12,
@@ -249,7 +257,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: ListView(
-                              children: getHourList(info.hourly),
+                              children: getHourList(
+                                info.hourly,
+                                info.timezoneOffset,
+                              ),
                               scrollDirection: Axis.horizontal,
                             ),
                           ),
@@ -269,7 +280,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 140,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
-                          children: getDailyList(info.daily),
+                          children: getDailyList(
+                            info.daily,
+                            info.timezoneOffset,
+                          ),
                         ),
                       ),
                       Container(
@@ -410,7 +424,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List<Widget> getHourList(List<Hourly> hourly) {
+  List<Widget> getHourList(List<Hourly> hourly, int offset) {
     List<Widget> hourList = [];
     for (int i = 0; i < 24; i++) {
       hourList.add(
@@ -421,7 +435,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.only(bottom: 5),
                 child: Text(
                   DateFormat.Hm().format(
-                    DateTime.fromMillisecondsSinceEpoch(hourly[i].dt * 1000),
+                    DateTimeConverter.convert(hourly[i].dt, offset),
                   ),
                   style: TextStyle(
                     fontSize: 16,
@@ -452,7 +466,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return hourList;
   }
 
-  List<Widget> getDailyList(List<Daily> daily) {
+  List<Widget> getDailyList(List<Daily> daily, int offset) {
     List<Widget> dayList = [];
     int i = 0;
     for (var item in daily) {
@@ -470,7 +484,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Text(
                     AppLocalizations.of(context)!.dayOfWeek(
-                      DateTime.fromMillisecondsSinceEpoch(item.dt * 1000),
+                      DateTimeConverter.convert(item.dt, offset),
                     ),
                     style: const TextStyle(fontSize: 20),
                   ),
@@ -479,7 +493,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Text(
                     AppLocalizations.of(context)!.monthAndDay(
-                      DateTime.fromMillisecondsSinceEpoch(item.dt * 1000),
+                      DateTimeConverter.convert(item.dt, offset),
                     ),
                     style: const TextStyle(fontSize: 12),
                   ),

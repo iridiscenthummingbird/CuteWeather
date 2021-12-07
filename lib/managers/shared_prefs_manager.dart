@@ -24,6 +24,7 @@ class SharedPreferencesManager extends ISharedPreferencesManager {
     sharedPreferences.setString("cityName", prefs.cityName);
     sharedPreferences.setDouble("lat", prefs.lat);
     sharedPreferences.setDouble("lon", prefs.lon);
+    sharedPreferences.setInt("offset", prefs.offset);
   }
 
   @override
@@ -32,6 +33,7 @@ class SharedPreferencesManager extends ISharedPreferencesManager {
       cityName: sharedPreferences.getString("cityName") ?? "London",
       lon: sharedPreferences.getDouble("lon") ?? -0.1257,
       lat: sharedPreferences.getDouble("lat") ?? 51.5085,
+      offset: sharedPreferences.getInt("offset") ?? 0,
     );
   }
 

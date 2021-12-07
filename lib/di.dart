@@ -50,10 +50,18 @@ class _DIState extends State<DI> {
             child: widget.child,
           );
         } else {
-          return const MaterialApp(
+          return MaterialApp(
             debugShowCheckedModeBanner: false,
+            themeMode: ThemeMode.dark,
+            darkTheme: ThemeData(
+              colorScheme: const ColorScheme.dark(),
+            ),
             home: Scaffold(
-              body: Center(
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0.0,
+              ),
+              body: const Center(
                 child: CircularProgressIndicator(),
               ),
             ),

@@ -6,6 +6,7 @@ class City {
   final Weather weather;
   final String name;
   final double temp;
+  final int timezoneOffset;
 
   City(
     this.lat,
@@ -13,6 +14,7 @@ class City {
     this.weather,
     this.name,
     this.temp,
+    this.timezoneOffset,
   );
 
   factory City.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class City {
       Weather.fromJson(json['weather'][0]),
       json['name'],
       double.parse(json['main']['temp'].toString()),
+      json['timezone'] as int,
     );
   }
 }

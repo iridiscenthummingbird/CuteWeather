@@ -1,16 +1,31 @@
-# cute_weather_v2
+<h1 align="center">Cute Weather</h1>
+<img src="https://i.ibb.co/4S2KMw3/Cute-Weather.png" width="100%">
+<h2 align="center"><a  href="https://drive.google.com/file/d/1sIfDaSGFY0kP5u_JviO0CHYROWD_ixEO/view?usp=sharing">APK Demo</a></h2>
 
-A new Flutter project.
+## Description
+Cute Weather is a Flutter pet-project.
 
-## Getting Started
+- [OpenWeatherAPI](https://openweathermap.org/api)
+- [Icon Pack](https://www.flaticon.com/packs/weather-507)
+- Localization
+    - English
+    - Ukrainian
+    - Russian
 
-This project is a starting point for a Flutter application.
+<p align="center">
+  <img src="https://media.giphy.com/media/3BNv6cI2cOux1MBU7h/giphy.gif" alt="GIF"/>
+  <img src="https://media.giphy.com/media/iQ2YccbAL0gckSRNrc/giphy.gif" alt="GIF"/>
+</p>
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation
+Previously you should add your own key from [OpenWeatherAPI](https://openweathermap.org/api) to lib\utils\keys.dart.
+```dart
+class Keys {
+  static String apiKey = "Your key";
+}
+```
+Also you should run this commands in terminal:
+```
+flutter pub get
+flutter packages pub run build_runner build
+```

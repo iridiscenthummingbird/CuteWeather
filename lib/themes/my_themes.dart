@@ -8,6 +8,7 @@ class MyThemes {
     colorScheme: const ColorScheme.dark(),
     iconTheme: const IconThemeData(color: Colors.white),
   );
+
   static final lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     primaryColor: Colors.white,

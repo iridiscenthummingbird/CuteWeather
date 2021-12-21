@@ -1,18 +1,18 @@
-import 'package:cute_weather_v2/models/cityname_and_offset.dart';
-import 'package:cute_weather_v2/models/daily.dart';
-import 'package:cute_weather_v2/models/hourly.dart';
 import 'package:cute_weather_v2/models/info.dart';
 import 'package:cute_weather_v2/screens/home_screen/cubit/home_cubit.dart';
+import 'package:cute_weather_v2/screens/home_screen/widgets/custom_appbar.dart';
+import 'package:cute_weather_v2/screens/home_screen/widgets/custom_drawer.dart';
+import 'package:cute_weather_v2/screens/home_screen/widgets/custom_tooltip.dart';
+import 'package:cute_weather_v2/screens/home_screen/widgets/day_list.dart';
 import 'package:cute_weather_v2/screens/home_screen/widgets/details.dart';
-import 'package:cute_weather_v2/screens/home_screen/widgets/theme_switcher.dart';
+import 'package:cute_weather_v2/screens/home_screen/widgets/hour_list.dart';
+import 'package:cute_weather_v2/screens/home_screen/widgets/subtitle.dart';
+import 'package:cute_weather_v2/screens/home_screen/widgets/wind_and_pressure.dart';
 import 'package:cute_weather_v2/screens/search_screen/search_screen.dart';
-import 'package:cute_weather_v2/services/date_time_converter.dart';
-import 'package:cute_weather_v2/services/getter_main_string.dart';
+import 'package:cute_weather_v2/utils/getter_main_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
-import 'package:vector_math/vector_math.dart' as vector;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -35,79 +35,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 50.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
-                "Cute Weather",
-                style: TextStyle(fontSize: 24),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(AppLocalizations.of(context)!.darkTheme),
-                  const ThemeSwitcher(),
-                ],
-              ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Text(
-                      "${AppLocalizations.of(context)!.createdBy}: @iridiscenthummingbird"),
-                ),
-              ),
-              const SizedBox(
-                height: 22,
-              ),
-            ],
-          ),
-        ),
-      ),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         centerTitle: true,
         foregroundColor: Theme.of(context).iconTheme.color,
-        title: StreamBuilder<CityNameAndOffset>(
-          stream: _cubit.cityStream,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Column(
-                children: [
-                  Text(
-                    snapshot.data!.name,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    AppLocalizations.of(context)!.nowDateTime(
-                      DateTimeConverter.convert(
-                        DateTime.now().millisecondsSinceEpoch ~/ 1000,
-                        snapshot.data!.offset,
-                      ),
-                      DateTimeConverter.convert(
-                        DateTime.now().millisecondsSinceEpoch ~/ 1000,
-                        snapshot.data!.offset,
-                      ),
-                    ),
-                    style: const TextStyle(
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              );
-            } else {
-              return Container();
-            }
-          },
+        title: BlocProvider.value(
+          value: _cubit,
+          child: const CustomAppbar(),
         ),
         actions: [
           IconButton(
@@ -131,8 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 context,
                 MaterialPageRoute(builder: (context) => const SearchScreen()),
               ).then(
-                (value) =>
-                    _cubit.getData(AppLocalizations.of(context)!.localeName),
+                (value) => _cubit.getData(AppLocalizations.of(context)!.localeName),
               );
             },
           ),
@@ -185,24 +120,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               )
                             ],
                           ),
-                          Tooltip(
-                              message: AppLocalizations.of(context)!.pressure,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    info.current.pressure.toString(),
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
-                                  Padding(
-                                    child: Image.asset(
-                                      'assets/barometer.png',
-                                      height: 14,
-                                      width: 14,
-                                    ),
-                                    padding: const EdgeInsets.only(left: 5.0),
-                                  )
-                                ],
-                              ))
+                          CustomTooltip(
+                            message: AppLocalizations.of(context)!.pressure,
+                            value: info.current.pressure,
+                            image: 'assets/barometer.png',
+                          ),
                         ],
                       ),
                       Row(
@@ -212,201 +134,27 @@ class _HomeScreenState extends State<HomeScreen> {
                             "${AppLocalizations.of(context)!.feelsLike} ${info.current.feelsLike.round()}°C",
                             style: const TextStyle(fontSize: 14),
                           ),
-                          Tooltip(
+                          CustomTooltip(
                             message: AppLocalizations.of(context)!.humidity,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  info.current.humidity.toString(),
-                                  style: const TextStyle(fontSize: 14),
-                                ),
-                                Padding(
-                                  child: Image.asset(
-                                    'assets/humidity.png',
-                                    height: 14,
-                                    width: 14,
-                                  ),
-                                  padding: const EdgeInsets.only(left: 5.0),
-                                )
-                              ],
-                            ),
-                          )
+                            value: info.current.humidity,
+                            image: 'assets/humidity.png',
+                          ),
                         ],
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                          top: 20,
-                          bottom: 10,
-                        ),
-                        child: Align(
-                          child: Text(
-                            AppLocalizations.of(context)!.hourlyForecast,
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                          alignment: Alignment.centerLeft,
-                        ),
+                      Subtitle(
+                        subtitle: AppLocalizations.of(context)!.hourlyForecast,
                       ),
-                      SizedBox(
-                        height: 115,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: const Color.fromARGB(75, 214, 214, 214),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: ListView(
-                              children: getHourList(
-                                info.hourly,
-                                info.timezoneOffset,
-                              ),
-                              scrollDirection: Axis.horizontal,
-                            ),
-                          ),
-                        ),
+                      HourList(info: info),
+                      Subtitle(
+                        subtitle: AppLocalizations.of(context)!.dailyForecast,
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 20, bottom: 10),
-                        child: Align(
-                          child: Text(
-                            AppLocalizations.of(context)!.dailyForecast,
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                          alignment: Alignment.centerLeft,
-                        ),
+                      DayList(info: info),
+                      Subtitle(
+                        subtitle: AppLocalizations.of(context)!.windAndPressure,
                       ),
-                      SizedBox(
-                        height: 140,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: getDailyList(
-                            info.daily,
-                            info.timezoneOffset,
-                          ),
-                        ),
-                      ),
-                      Container(
-                          padding: const EdgeInsets.only(top: 20, bottom: 10),
-                          child: Align(
-                            child: Text(
-                              AppLocalizations.of(context)!.windAndPressure,
-                              style: const TextStyle(fontSize: 20),
-                            ),
-                            alignment: Alignment.centerLeft,
-                          )),
-                      SizedBox(
-                        height: 110,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: const Color.fromARGB(75, 214, 214, 214),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Transform.rotate(
-                                      child: Image.asset(
-                                        'assets/down-arrow.png',
-                                        color: Theme.of(context)
-                                            .iconTheme
-                                            .color!
-                                            .withOpacity(0.8),
-                                      ),
-                                      angle:
-                                          vector.radians(info.current.windDeg),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 7, bottom: 7),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        windDeg(
-                                          info.current.windDeg,
-                                          context,
-                                        ),
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          color: Theme.of(context)
-                                              .iconTheme
-                                              .color!
-                                              .withOpacity(0.54),
-                                        ),
-                                      ),
-                                      Text(
-                                        "${info.current.windSpeed.toString()} ${AppLocalizations.of(context)!.ms}",
-                                        style: const TextStyle(fontSize: 18),
-                                      ),
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .nBeauforts(
-                                          getBeaufort(info.current.windSpeed),
-                                        ),
-                                        style: const TextStyle(fontSize: 18),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                const VerticalDivider(
-                                  thickness: 1,
-                                  color: Colors.black45,
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 7, bottom: 7),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        AppLocalizations.of(context)!.pressure,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          color: Theme.of(context)
-                                              .iconTheme
-                                              .color!
-                                              .withOpacity(0.54),
-                                        ),
-                                      ),
-                                      Image.asset(
-                                        'assets/barometer.png',
-                                        height: 20,
-                                        width: 20,
-                                      ),
-                                      Text(
-                                        "${info.current.pressure.toString()} ${AppLocalizations.of(context)!.mbar}",
-                                        style: const TextStyle(fontSize: 18),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 20, bottom: 10),
-                        child: Align(
-                          child: Text(
-                            AppLocalizations.of(context)!.details,
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                          alignment: Alignment.centerLeft,
-                        ),
+                      WindAndPressure(info: info),
+                      Subtitle(
+                        subtitle: AppLocalizations.of(context)!.details,
                       ),
                       DetailsWidget(
                         info: info,
@@ -416,161 +164,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             } else {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
           },
         ),
       ),
     );
-  }
-
-  List<Widget> getHourList(List<Hourly> hourly, int offset) {
-    List<Widget> hourList = [];
-    for (int i = 0; i < 24; i++) {
-      hourList.add(
-        Padding(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Text(
-                  DateFormat.Hm().format(
-                    DateTimeConverter.convert(hourly[i].dt, offset),
-                  ),
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).iconTheme.color!.withOpacity(0.54),
-                  ),
-                ),
-              ),
-              Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: Image.asset(
-                    'assets/${hourly[i].weather.icon}.png',
-                    width: 41,
-                    height: 41,
-                  )),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Text(
-                  "${hourly[i].temp.round()}°",
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ),
-            ],
-          ),
-          padding: EdgeInsets.only(right: 10, left: i == 0 ? 10 : 0),
-        ),
-      );
-    }
-    return hourList;
-  }
-
-  List<Widget> getDailyList(List<Daily> daily, int offset) {
-    List<Widget> dayList = [];
-    int i = 0;
-    for (var item in daily) {
-      dayList.add(
-        Padding(
-          padding: EdgeInsets.only(right: i < 7 ? 10 : 0),
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: const Color.fromARGB(75, 214, 214, 214)),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: Text(
-                    AppLocalizations.of(context)!.dayOfWeek(
-                      DateTimeConverter.convert(item.dt, offset),
-                    ),
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: Text(
-                    AppLocalizations.of(context)!.monthAndDay(
-                      DateTimeConverter.convert(item.dt, offset),
-                    ),
-                    style: const TextStyle(fontSize: 12),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: Image.asset(
-                    'assets/${item.weather.icon}.png',
-                    width: 30,
-                    height: 30,
-                  ),
-                ),
-                Text(
-                  "${AppLocalizations.of(context)!.highTemp}: ${item.temp.max.round()}°C",
-                  style: const TextStyle(fontSize: 12),
-                ),
-                Text(
-                  "${AppLocalizations.of(context)!.lowTemp}: ${item.temp.min.round()}°C",
-                  style: const TextStyle(fontSize: 12),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
-      i++;
-    }
-    return dayList;
-  }
-
-  String windDeg(double deg, BuildContext context) {
-    if (deg >= 22.5 && deg < 67.5) {
-      return AppLocalizations.of(context)!.sw;
-    } else if (deg >= 67.5 && deg < 112.5) {
-      return AppLocalizations.of(context)!.w;
-    } else if (deg >= 112.5 && deg < 157.5) {
-      return AppLocalizations.of(context)!.nw;
-    } else if (deg >= 157.5 && deg < 202.5) {
-      return AppLocalizations.of(context)!.n;
-    } else if (deg >= 202.5 && deg < 247.5) {
-      return AppLocalizations.of(context)!.ne;
-    } else if (deg >= 247.5 && deg < 292.5) {
-      return AppLocalizations.of(context)!.e;
-    } else if (deg >= 292.5 && deg < 337.5) {
-      return AppLocalizations.of(context)!.se;
-    } else {
-      return AppLocalizations.of(context)!.s;
-    }
-  }
-
-  int getBeaufort(double speed) {
-    if (speed < 0.5) {
-      return 0;
-    } else if (speed >= 0.5 && speed < 1.5) {
-      return 1;
-    } else if (speed >= 1.5 && speed < 3.3) {
-      return 2;
-    } else if (speed >= 3.3 && speed < 5.5) {
-      return 3;
-    } else if (speed >= 5.5 && speed < 7.9) {
-      return 4;
-    } else if (speed >= 7.9 && speed < 10.7) {
-      return 5;
-    } else if (speed >= 10.7 && speed < 13.8) {
-      return 6;
-    } else if (speed >= 13.9 && speed < 17.1) {
-      return 7;
-    } else if (speed >= 17.2 && speed < 20.7) {
-      return 8;
-    } else if (speed >= 20.7 && speed < 24.4) {
-      return 9;
-    } else if (speed >= 24.4 && speed < 28.4) {
-      return 10;
-    } else if (speed >= 28.4 && speed < 32.6) {
-      return 11;
-    } else {
-      return 12;
-    }
   }
 }

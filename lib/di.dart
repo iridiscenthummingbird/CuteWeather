@@ -4,7 +4,6 @@ import 'package:cute_weather_v2/repositories/api_repository.dart';
 import 'package:cute_weather_v2/repositories/shared_prefs_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DI extends StatefulWidget {
@@ -34,8 +33,7 @@ class _DIState extends State<DI> {
               ),
               RepositoryProvider<ISharedPreferencesRepository>(
                 create: (context) => SharedPreferencesRepository(
-                  sharedPreferencesManager:
-                      context.read<ISharedPreferencesManager>(),
+                  sharedPreferencesManager: context.read<ISharedPreferencesManager>(),
                 ),
               ),
               RepositoryProvider<IApiManager>(

@@ -1,5 +1,5 @@
 import 'package:cute_weather_v2/models/saved_prefs.dart';
-import 'package:cute_weather_v2/services/keys.dart';
+import 'package:cute_weather_v2/utils/keys.dart';
 import 'package:http/http.dart' as http;
 
 abstract class IApiManager {
@@ -16,8 +16,8 @@ abstract class IApiManager {
 class ApiManager extends IApiManager {
   @override
   Future<String?> getCity(String cityName, [String lang = "en"]) async {
-    var url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$_key&units=metric&lang=$lang');
+    var url =
+        Uri.parse('https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$_key&units=metric&lang=$lang');
     var response = await http.get(url);
     if (response.statusCode == 200) {
       return response.body;

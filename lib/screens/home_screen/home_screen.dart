@@ -26,10 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     _cubit = context.read<HomeCubit>();
-    Future.delayed(Duration.zero, () {
-      _cubit.getData(AppLocalizations.of(context)!.localeName);
-    });
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _cubit.getData(AppLocalizations.of(context)!.localeName);
+    super.didChangeDependencies();
   }
 
   @override
@@ -75,11 +78,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () async => _cubit.getData(),
-        child: StreamBuilder<Info>(
-          stream: _cubit.infoStream,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final Info info = snapshot.data!;
+        child: BlocBuilder(
+          bloc: _cubit,
+          builder: (context, state) {
+            if (state is HomeDataLoaded) {
+              final Info info = state.info;
               return SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),

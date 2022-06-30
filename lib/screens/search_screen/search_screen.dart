@@ -1,7 +1,7 @@
-import 'dart:async';
-
 import 'package:cute_weather_v2/models/city.dart';
-import 'package:cute_weather_v2/screens/home_screen/cubit/home_cubit.dart';
+import 'package:cute_weather_v2/repositories/api_repository.dart';
+import 'package:cute_weather_v2/repositories/shared_prefs_repository.dart';
+import 'package:cute_weather_v2/screens/search_screen/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,13 +15,16 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  late HomeCubit _cubit;
-  late StreamController<City?> _controller;
+  late final SearchCubit _cubit;
+
+  City? foundedCity;
 
   @override
   void initState() {
-    _cubit = context.read<HomeCubit>();
-    _controller = StreamController<City>();
+    _cubit = SearchCubit(
+      apiRepository: context.read<IApiRepository>(),
+      sharedPreferencesRepository: context.read<ISharedPreferencesRepository>(),
+    );
     super.initState();
   }
 
@@ -31,22 +34,21 @@ class _SearchScreenState extends State<SearchScreen> {
       body: FloatingSearchBar(
         hint: AppLocalizations.of(context)!.search,
         onQueryChanged: (query) async {
-          final result = await _cubit.findCity(
+          await _cubit.findCity(
             query,
             AppLocalizations.of(context)!.localeName,
           );
-          if (result == null) {
-            _controller.addError('Error');
-          } else {
-            _controller.add(result);
-          }
         },
         builder: (context, transition) {
-          return StreamBuilder<City?>(
-            stream: _controller.stream,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final city = snapshot.data!;
+          return BlocBuilder(
+            bloc: _cubit,
+            builder: (context, state) {
+              if (state is FindCityState) {
+                foundedCity = state.city;
+              } else {
+                foundedCity = null;
+              }
+              if (foundedCity != null) {
                 return Center(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -55,20 +57,20 @@ class _SearchScreenState extends State<SearchScreen> {
                       elevation: 0.0,
                       child: ListTile(
                         leading: Image.asset(
-                          'assets/${city.weather.icon}.png',
+                          'assets/${foundedCity!.weather.icon}.png',
                           width: 40,
                           height: 40,
                         ),
                         title: Text(
-                          city.name,
+                          foundedCity!.name,
                           style: const TextStyle(fontSize: 18),
                         ),
                         subtitle: Text(
-                          '${city.temp.round()}°',
+                          '${foundedCity!.temp.round()}°',
                           style: const TextStyle(fontSize: 16),
                         ),
                         onTap: () {
-                          _cubit.saveCity(city);
+                          _cubit.saveCity(foundedCity!);
                           Navigator.pop(context);
                         },
                       ),

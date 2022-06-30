@@ -10,14 +10,14 @@ class CustomAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<CityNameAndOffset>(
-      stream: context.read<HomeCubit>().cityStream,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        if (state is HomeDataLoaded) {
+          final CityNameAndOffset data = state.cityNameAndOffset;
           return Column(
             children: [
               Text(
-                snapshot.data!.name,
+                data.name,
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -27,11 +27,11 @@ class CustomAppbar extends StatelessWidget {
                 AppLocalizations.of(context)!.nowDateTime(
                   DateTimeConverter.convert(
                     DateTime.now().millisecondsSinceEpoch ~/ 1000,
-                    snapshot.data!.offset,
+                    data.offset,
                   ),
                   DateTimeConverter.convert(
                     DateTime.now().millisecondsSinceEpoch ~/ 1000,
-                    snapshot.data!.offset,
+                    data.offset,
                   ),
                 ),
                 style: const TextStyle(

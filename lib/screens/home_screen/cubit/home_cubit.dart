@@ -22,25 +22,17 @@ class HomeCubit extends Cubit<HomeState> {
   final IApiRepository apiRepository;
   final ISharedPreferencesRepository sharedPreferencesRepository;
 
-  final StreamController<CityNameAndOffset> _cityStreamController = StreamController<CityNameAndOffset>();
-  Stream<CityNameAndOffset> get cityStream => _cityStreamController.stream;
-
-  final StreamController<Info> _infoStreamController = StreamController<Info>();
-  Stream<Info> get infoStream => _infoStreamController.stream;
-
   Future<void> getData([String lang = 'en']) async {
     final SavedPrefs prefs = sharedPreferencesRepository.getPrefs();
-    _infoStreamController.add(await apiRepository.getInfo(prefs, lang));
-    _cityStreamController.add(
-      CityNameAndOffset(
-        prefs.cityName,
-        prefs.offset,
+    emit(
+      HomeDataLoaded(
+        cityNameAndOffset: CityNameAndOffset(
+          prefs.cityName,
+          prefs.offset,
+        ),
+        info: await apiRepository.getInfo(prefs, lang),
       ),
     );
-  }
-
-  Future<City?> findCity(String cityName, [String lang = 'en']) async {
-    return await apiRepository.getCity(cityName, lang);
   }
 
   void saveCity(City city) {

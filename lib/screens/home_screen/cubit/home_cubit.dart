@@ -22,23 +22,24 @@ class HomeCubit extends Cubit<HomeState> {
   final IApiRepository apiRepository;
   final ISharedPreferencesRepository sharedPreferencesRepository;
 
-  final StreamController<CityNameAndOffset> _cityStreamController =
-      StreamController<CityNameAndOffset>();
+  final StreamController<CityNameAndOffset> _cityStreamController = StreamController<CityNameAndOffset>();
   Stream<CityNameAndOffset> get cityStream => _cityStreamController.stream;
 
   final StreamController<Info> _infoStreamController = StreamController<Info>();
   Stream<Info> get infoStream => _infoStreamController.stream;
 
-  void getData([String lang = 'en']) async {
-    SavedPrefs prefs = sharedPreferencesRepository.getPrefs();
+  Future<void> getData([String lang = 'en']) async {
+    final SavedPrefs prefs = sharedPreferencesRepository.getPrefs();
     _infoStreamController.add(await apiRepository.getInfo(prefs, lang));
-    _cityStreamController.add(CityNameAndOffset(
-      prefs.cityName,
-      prefs.offset,
-    ));
+    _cityStreamController.add(
+      CityNameAndOffset(
+        prefs.cityName,
+        prefs.offset,
+      ),
+    );
   }
 
-  Future<City?> findCity(String cityName, [String lang = "en"]) async {
+  Future<City?> findCity(String cityName, [String lang = 'en']) async {
     return await apiRepository.getCity(cityName, lang);
   }
 
@@ -53,8 +54,8 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  void getInfoFromCoords(String lang) async {
-    Location location = Location();
+  Future<void> getInfoFromCoords(String lang) async {
+    final Location location = Location();
 
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;

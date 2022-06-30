@@ -55,7 +55,7 @@ class WindAndPressure extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "${info.current.windSpeed.toString()} ${AppLocalizations.of(context)!.ms}",
+                      '${info.current.windSpeed.toString()} ${AppLocalizations.of(context)!.ms}',
                       style: const TextStyle(fontSize: 18),
                     ),
                     Text(
@@ -89,7 +89,7 @@ class WindAndPressure extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      "${info.current.pressure.toString()} ${AppLocalizations.of(context)!.mbar}",
+                      '${info.current.pressure.toString()} ${AppLocalizations.of(context)!.mbar}',
                       style: const TextStyle(fontSize: 18),
                     )
                   ],

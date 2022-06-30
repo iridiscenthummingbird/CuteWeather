@@ -4,8 +4,8 @@ import 'package:cute_weather_v2/models/city.dart';
 import 'package:cute_weather_v2/screens/home_screen/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -31,12 +31,12 @@ class _SearchScreenState extends State<SearchScreen> {
       body: FloatingSearchBar(
         hint: AppLocalizations.of(context)!.search,
         onQueryChanged: (query) async {
-          var result = await _cubit.findCity(
+          final result = await _cubit.findCity(
             query,
             AppLocalizations.of(context)!.localeName,
           );
           if (result == null) {
-            _controller.addError("Error");
+            _controller.addError('Error');
           } else {
             _controller.add(result);
           }
@@ -46,7 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
             stream: _controller.stream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                var city = snapshot.data!;
+                final city = snapshot.data!;
                 return Center(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -64,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           style: const TextStyle(fontSize: 18),
                         ),
                         subtitle: Text(
-                          "${city.temp.round()}°",
+                          '${city.temp.round()}°',
                           style: const TextStyle(fontSize: 16),
                         ),
                         onTap: () {

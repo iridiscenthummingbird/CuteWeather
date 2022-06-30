@@ -14,15 +14,15 @@ class DayList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Daily> daily = info.daily;
-    int offset = info.timezoneOffset;
+    final List<Daily> daily = info.daily;
+    final int offset = info.timezoneOffset;
     return SizedBox(
       height: 140,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: daily.length,
         itemBuilder: (context, i) {
-          Daily item = daily[i];
+          final Daily item = daily[i];
           return Padding(
             padding: EdgeInsets.only(right: i < 7 ? 10 : 0),
             child: Container(
@@ -58,11 +58,11 @@ class DayList extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${AppLocalizations.of(context)!.highTemp}: ${item.temp.max.round()}°C",
+                    '${AppLocalizations.of(context)!.highTemp}: ${item.temp.max.round()}°C',
                     style: const TextStyle(fontSize: 12),
                   ),
                   Text(
-                    "${AppLocalizations.of(context)!.lowTemp}: ${item.temp.min.round()}°C",
+                    '${AppLocalizations.of(context)!.lowTemp}: ${item.temp.min.round()}°C',
                     style: const TextStyle(fontSize: 12),
                   )
                 ],

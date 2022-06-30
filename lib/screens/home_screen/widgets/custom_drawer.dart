@@ -14,7 +14,7 @@ class CustomDrawer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const Text(
-              "Cute Weather",
+              'Cute Weather',
               style: TextStyle(fontSize: 24),
             ),
             const SizedBox(
@@ -30,7 +30,7 @@ class CustomDrawer extends StatelessWidget {
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: Text("${AppLocalizations.of(context)!.createdBy}: @iridiscenthummingbird"),
+                child: Text('${AppLocalizations.of(context)!.createdBy}: @iridiscenthummingbird'),
               ),
             ),
             const SizedBox(

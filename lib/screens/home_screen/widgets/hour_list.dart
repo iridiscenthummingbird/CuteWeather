@@ -53,7 +53,7 @@ class HourList extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 5),
                       child: Text(
-                        "${hourly[i].temp.round()}°",
+                        '${hourly[i].temp.round()}°',
                         style: const TextStyle(fontSize: 20),
                       ),
                     ),

@@ -23,7 +23,7 @@ class DetailsWidget extends StatelessWidget {
     } else if (val >= 11) {
       return AppLocalizations.of(context)!.extreme;
     }
-    return "";
+    return '';
   }
 
   @override
@@ -31,9 +31,8 @@ class DetailsWidget extends StatelessWidget {
     return SizedBox(
       height: 265,
       child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: const Color.fromARGB(75, 214, 214, 214)),
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color.fromARGB(75, 214, 214, 214)),
         child: Padding(
           padding: const EdgeInsets.only(top: 10),
           child: Row(
@@ -79,7 +78,7 @@ class DetailsWidget extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              "${info.current.humidity.toString()}%",
+                              '${info.current.humidity.toString()}%',
                               style: const TextStyle(fontSize: 16),
                             )
                           ],
@@ -154,7 +153,7 @@ class DetailsWidget extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              "${info.current.visibility / 1000} ${AppLocalizations.of(context)!.km}",
+                              '${info.current.visibility / 1000} ${AppLocalizations.of(context)!.km}',
                               style: const TextStyle(fontSize: 16),
                             )
                           ],
@@ -189,7 +188,7 @@ class DetailsWidget extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              "${info.current.dewPoint.round()}°",
+                              '${info.current.dewPoint.round()}°',
                               style: const TextStyle(fontSize: 16),
                             )
                           ],
@@ -223,7 +222,7 @@ class DetailsWidget extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              "${info.current.clouds}%",
+                              '${info.current.clouds}%',
                               style: const TextStyle(fontSize: 16),
                             )
                           ],

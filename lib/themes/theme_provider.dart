@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:cute_weather_v2/repositories/shared_prefs_repository.dart';
+import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
   late ThemeMode themeMode = sharedPreferencesRepository.getTheme();

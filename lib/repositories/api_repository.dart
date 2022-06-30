@@ -10,12 +10,12 @@ abstract class IApiRepository {
 
   IApiRepository(this.apiManager);
 
-  Future<Info> getInfo(SavedPrefs savedPrefs, [String lang = "en"]);
-  Future<City?> getCity(String cityName, [String lang = "en"]);
+  Future<Info> getInfo(SavedPrefs savedPrefs, [String lang = 'en']);
+  Future<City?> getCity(String cityName, [String lang = 'en']);
   Future<City?> getCityFromCoords(
     double lon,
     double lat, [
-    String lang = "en",
+    String lang = 'en',
   ]);
 }
 
@@ -23,10 +23,10 @@ class ApiRepository extends IApiRepository {
   ApiRepository({required IApiManager apiManager}) : super(apiManager);
 
   @override
-  Future<City?> getCity(String cityName, [String lang = "en"]) async {
-    var body = await apiManager.getCity(cityName, lang);
+  Future<City?> getCity(String cityName, [String lang = 'en']) async {
+    final body = await apiManager.getCity(cityName, lang);
     if (body != null) {
-      var parsed = jsonDecode(body);
+      final parsed = jsonDecode(body) as Map<String, dynamic>;
       return City.fromJson(parsed);
     } else {
       return null;
@@ -34,18 +34,17 @@ class ApiRepository extends IApiRepository {
   }
 
   @override
-  Future<Info> getInfo(SavedPrefs savedPrefs, [String lang = "en"]) async {
-    var body = await apiManager.getInfo(lang, savedPrefs);
-    var parsed = jsonDecode(body);
+  Future<Info> getInfo(SavedPrefs savedPrefs, [String lang = 'en']) async {
+    final body = await apiManager.getInfo(lang, savedPrefs);
+    final parsed = jsonDecode(body) as Map<String, dynamic>;
     return Info.fromJson(parsed);
   }
 
   @override
-  Future<City?> getCityFromCoords(double lon, double lat,
-      [String lang = "en"]) async {
-    var body = await apiManager.getCityFromCoords(lon, lat, lang);
+  Future<City?> getCityFromCoords(double lon, double lat, [String lang = 'en']) async {
+    final body = await apiManager.getCityFromCoords(lon, lat, lang);
     if (body != null) {
-      var parsed = jsonDecode(body);
+      final parsed = jsonDecode(body) as Map<String, dynamic>;
       return City.fromJson(parsed);
     } else {
       return null;

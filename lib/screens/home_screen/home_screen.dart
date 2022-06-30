@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
               size: 30.0,
             ),
             onPressed: () {
-              Navigator.push(
+              Navigator.push<void>(
                 context,
                 MaterialPageRoute(builder: (context) => const SearchScreen()),
               ).then(
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
           stream: _cubit.infoStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              Info info = snapshot.data!;
+              final Info info = snapshot.data!;
               return SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Row(
                             children: [
                               Text(
-                                "${info.current.temp.round()}°",
+                                '${info.current.temp.round()}°',
                                 style: const TextStyle(fontSize: 52),
                               ),
                               const Text(
@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${AppLocalizations.of(context)!.feelsLike} ${info.current.feelsLike.round()}°C",
+                            '${AppLocalizations.of(context)!.feelsLike} ${info.current.feelsLike.round()}°C',
                             style: const TextStyle(fontSize: 14),
                           ),
                           CustomTooltip(

@@ -21,8 +21,8 @@ class City {
     return City(
       double.parse(json['coord']['lat'].toString()),
       double.parse(json['coord']['lon'].toString()),
-      Weather.fromJson(json['weather'][0]),
-      json['name'],
+      Weather.fromJson(json['weather'][0] as Map<String, dynamic>),
+      json['name'] as String,
       double.parse(json['main']['temp'].toString()),
       json['timezone'] as int,
     );

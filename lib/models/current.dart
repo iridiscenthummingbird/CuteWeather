@@ -31,7 +31,7 @@ class Current {
 
   factory Current.fromJson(Map<String, dynamic> json) {
     return Current(
-      json['dt'],
+      json['dt'] as int,
       double.parse(json['temp'].toString()),
       double.parse(json['feels_like'].toString()),
       double.parse(json['wind_deg'].toString()),
@@ -40,9 +40,9 @@ class Current {
       double.parse(json['uvi'].toString()),
       double.parse(json['clouds'].toString()),
       double.parse(json['visibility'].toString()),
-      json['pressure'],
-      json['humidity'],
-      Weather.fromJson(json['weather'][0]),
+      json['pressure'] as int,
+      json['humidity'] as int,
+      Weather.fromJson(json['weather'][0] as Map<String, dynamic>),
     );
   }
 }

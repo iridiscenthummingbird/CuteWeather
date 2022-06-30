@@ -21,12 +21,12 @@ class Daily {
 
   factory Daily.fromJson(Map<String, dynamic> json) {
     return Daily(
-      json['dt'],
-      Temp.fromJson(json['temp']),
-      FeelsLike.fromJson(json['feels_like']),
-      json['pressure'],
-      json['humidity'],
-      Weather.fromJson(json['weather'][0]),
+      json['dt'] as int,
+      Temp.fromJson(json['temp'] as Map<String, dynamic>),
+      FeelsLike.fromJson(json['feels_like'] as Map<String, dynamic>),
+      json['pressure'] as int,
+      json['humidity'] as int,
+      Weather.fromJson(json['weather'][0] as Map<String, dynamic>),
     );
   }
 }

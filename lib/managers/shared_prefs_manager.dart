@@ -41,7 +41,7 @@ class SharedPreferencesManager extends ISharedPreferencesManager {
   ThemeMode getTheme() {
     final theme = sharedPreferences.getString('theme');
     if (theme == null) {
-      final brightness = SchedulerBinding.instance.window.platformBrightness;
+      final brightness = SchedulerBinding.instance!.window.platformBrightness;
       final bool isDarkMode = brightness == Brightness.dark;
       if (isDarkMode) {
         return ThemeMode.dark;

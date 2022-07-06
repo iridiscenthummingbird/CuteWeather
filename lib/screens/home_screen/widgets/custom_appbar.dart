@@ -1,9 +1,9 @@
 import 'package:cute_weather_v2/models/cityname_and_offset.dart';
 import 'package:cute_weather_v2/screens/home_screen/cubit/home_cubit.dart';
 import 'package:cute_weather_v2/utils/date_time_converter.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({Key? key}) : super(key: key);
@@ -14,6 +14,12 @@ class CustomAppbar extends StatelessWidget {
       builder: (context, state) {
         if (state is HomeDataLoaded) {
           final CityNameAndOffset data = state.cityNameAndOffset;
+          final String nowDateTime = DateFormat('E Hm', context.locale.languageCode).format(
+            DateTimeConverter.convert(
+              DateTime.now().millisecondsSinceEpoch ~/ 1000,
+              data.offset,
+            ),
+          );
           return Column(
             children: [
               Text(
@@ -24,16 +30,7 @@ class CustomAppbar extends StatelessWidget {
                 ),
               ),
               Text(
-                AppLocalizations.of(context)!.nowDateTime(
-                  DateTimeConverter.convert(
-                    DateTime.now().millisecondsSinceEpoch ~/ 1000,
-                    data.offset,
-                  ),
-                  DateTimeConverter.convert(
-                    DateTime.now().millisecondsSinceEpoch ~/ 1000,
-                    data.offset,
-                  ),
-                ),
+                nowDateTime,
                 style: const TextStyle(
                   fontSize: 12,
                 ),

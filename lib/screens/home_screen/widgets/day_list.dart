@@ -1,8 +1,8 @@
 import 'package:cute_weather_v2/models/daily.dart';
 import 'package:cute_weather_v2/models/info.dart';
 import 'package:cute_weather_v2/utils/date_time_converter.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DayList extends StatelessWidget {
   const DayList({
@@ -23,6 +23,16 @@ class DayList extends StatelessWidget {
         itemCount: daily.length,
         itemBuilder: (context, i) {
           final Daily item = daily[i];
+          final String dayOfWeek = DateFormat.E(
+            context.locale.languageCode,
+          ).format(
+            DateTimeConverter.convert(item.dt, offset),
+          );
+          final String monthAndDay = DateFormat.MMMd(
+            context.locale.languageCode,
+          ).format(
+            DateTimeConverter.convert(item.dt, offset),
+          );
           return Padding(
             padding: EdgeInsets.only(right: i < 7 ? 10 : 0),
             child: Container(
@@ -34,18 +44,14 @@ class DayList extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5),
                     child: Text(
-                      AppLocalizations.of(context)!.dayOfWeek(
-                        DateTimeConverter.convert(item.dt, offset),
-                      ),
+                      dayOfWeek,
                       style: const TextStyle(fontSize: 20),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5),
                     child: Text(
-                      AppLocalizations.of(context)!.monthAndDay(
-                        DateTimeConverter.convert(item.dt, offset),
-                      ),
+                      monthAndDay,
                       style: const TextStyle(fontSize: 12),
                     ),
                   ),
@@ -58,11 +64,11 @@ class DayList extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${AppLocalizations.of(context)!.highTemp}: ${item.temp.max.round()}°C',
+                    '${'highTemp'.tr()}: ${item.temp.max.round()}°C',
                     style: const TextStyle(fontSize: 12),
                   ),
                   Text(
-                    '${AppLocalizations.of(context)!.lowTemp}: ${item.temp.min.round()}°C',
+                    '${'lowTemp'.tr()}: ${item.temp.min.round()}°C',
                     style: const TextStyle(fontSize: 12),
                   )
                 ],

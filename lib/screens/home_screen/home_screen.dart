@@ -10,9 +10,9 @@ import 'package:cute_weather_v2/screens/home_screen/widgets/subtitle.dart';
 import 'package:cute_weather_v2/screens/home_screen/widgets/wind_and_pressure.dart';
 import 'package:cute_weather_v2/screens/search_screen/search_screen.dart';
 import 'package:cute_weather_v2/utils/getter_main_string.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void didChangeDependencies() {
-    _cubit.getData(AppLocalizations.of(context)!.localeName);
+    _cubit.getData(context.locale.languageCode);
     super.didChangeDependencies();
   }
 
@@ -55,9 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
               size: 30.0,
             ),
             onPressed: () {
-              _cubit.getInfoFromCoords(
-                AppLocalizations.of(context)!.localeName,
-              );
+              _cubit.getInfoFromCoords(context.locale.languageCode);
             },
           ),
           IconButton(
@@ -70,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 context,
                 MaterialPageRoute(builder: (context) => const SearchScreen()),
               ).then(
-                (value) => _cubit.getData(AppLocalizations.of(context)!.localeName),
+                (value) => _cubit.getData(context.locale.languageCode),
               );
             },
           ),
@@ -124,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           CustomTooltip(
-                            message: AppLocalizations.of(context)!.pressure,
+                            message: 'pressure'.tr(),
                             value: info.current.pressure,
                             image: 'assets/barometer.png',
                           ),
@@ -134,30 +132,30 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${AppLocalizations.of(context)!.feelsLike} ${info.current.feelsLike.round()}°C',
+                            '${'feelsLike'.tr()} ${info.current.feelsLike.round()}°C',
                             style: const TextStyle(fontSize: 14),
                           ),
                           CustomTooltip(
-                            message: AppLocalizations.of(context)!.humidity,
+                            message: 'humidity'.tr(),
                             value: info.current.humidity,
                             image: 'assets/humidity.png',
                           ),
                         ],
                       ),
                       Subtitle(
-                        subtitle: AppLocalizations.of(context)!.hourlyForecast,
+                        subtitle: 'hourlyForecast'.tr(),
                       ),
                       HourList(info: info),
                       Subtitle(
-                        subtitle: AppLocalizations.of(context)!.dailyForecast,
+                        subtitle: 'dailyForecast'.tr(),
                       ),
                       DayList(info: info),
                       Subtitle(
-                        subtitle: AppLocalizations.of(context)!.windAndPressure,
+                        subtitle: 'windAndPressure'.tr(),
                       ),
                       WindAndPressure(info: info),
                       Subtitle(
-                        subtitle: AppLocalizations.of(context)!.details,
+                        subtitle: 'details'.tr(),
                       ),
                       DetailsWidget(
                         info: info,

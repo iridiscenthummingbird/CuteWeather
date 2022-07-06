@@ -1,7 +1,7 @@
 import 'package:cute_weather_v2/models/info.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailsWidget extends StatelessWidget {
   const DetailsWidget({
@@ -13,15 +13,15 @@ class DetailsWidget extends StatelessWidget {
 
   String uvi(int val, BuildContext context) {
     if (val >= 0 && val <= 2) {
-      return AppLocalizations.of(context)!.low;
+      return 'low'.tr();
     } else if (val >= 3 && val <= 5) {
-      return AppLocalizations.of(context)!.moderate;
+      return 'moderate'.tr();
     } else if (val >= 6 && val <= 7) {
-      return AppLocalizations.of(context)!.high;
+      return 'high'.tr();
     } else if (val >= 8 && val <= 10) {
-      return AppLocalizations.of(context)!.veryHigh;
+      return 'veryHigh'.tr();
     } else if (val >= 11) {
-      return AppLocalizations.of(context)!.extreme;
+      return 'extreme'.tr();
     }
     return '';
   }
@@ -72,7 +72,7 @@ class DetailsWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!.humidity,
+                                  'humidity'.tr(),
                                   style: const TextStyle(fontSize: 16),
                                 )
                               ],
@@ -111,7 +111,7 @@ class DetailsWidget extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    AppLocalizations.of(context)!.uvIndex,
+                                    'uvIndex'.tr(),
                                     style: const TextStyle(fontSize: 16),
                                   )
                                 ],
@@ -147,13 +147,13 @@ class DetailsWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!.visibility,
+                                  'visibility'.tr(),
                                   style: const TextStyle(fontSize: 16),
                                 )
                               ],
                             ),
                             Text(
-                              '${info.current.visibility / 1000} ${AppLocalizations.of(context)!.km}',
+                              '${info.current.visibility / 1000} ${'km'.tr()}',
                               style: const TextStyle(fontSize: 16),
                             )
                           ],
@@ -182,7 +182,7 @@ class DetailsWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!.dewPoint,
+                                  'dewPoint'.tr(),
                                   style: const TextStyle(fontSize: 16),
                                 )
                               ],
@@ -216,7 +216,7 @@ class DetailsWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!.clouds,
+                                  'clouds'.tr(),
                                   style: const TextStyle(fontSize: 16),
                                 )
                               ],

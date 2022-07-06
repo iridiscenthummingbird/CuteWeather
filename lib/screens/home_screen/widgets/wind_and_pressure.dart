@@ -1,7 +1,7 @@
 import 'package:cute_weather_v2/models/info.dart';
 import 'package:cute_weather_v2/utils/wind_functions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:vector_math/vector_math.dart' as vector;
 
 class WindAndPressure extends StatelessWidget {
@@ -55,12 +55,14 @@ class WindAndPressure extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${info.current.windSpeed.toString()} ${AppLocalizations.of(context)!.ms}',
+                      '${info.current.windSpeed.toString()} ${'ms'.tr()}',
                       style: const TextStyle(fontSize: 18),
                     ),
                     Text(
-                      AppLocalizations.of(context)!.nBeauforts(
-                        getBeaufort(info.current.windSpeed),
+                      'nBeauforts'.tr(
+                        namedArgs: {
+                          'count': '${getBeaufort(info.current.windSpeed)}',
+                        },
                       ),
                       style: const TextStyle(fontSize: 18),
                     )
@@ -77,7 +79,7 @@ class WindAndPressure extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.pressure,
+                      'pressure'.tr(),
                       style: TextStyle(
                         fontSize: 18,
                         color: Theme.of(context).iconTheme.color!.withOpacity(0.54),
@@ -89,7 +91,7 @@ class WindAndPressure extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      '${info.current.pressure.toString()} ${AppLocalizations.of(context)!.mbar}',
+                      '${info.current.pressure.toString()} ${'mbar'.tr()}',
                       style: const TextStyle(fontSize: 18),
                     )
                   ],

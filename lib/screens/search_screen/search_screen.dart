@@ -2,9 +2,9 @@ import 'package:cute_weather_v2/models/city.dart';
 import 'package:cute_weather_v2/repositories/api_repository.dart';
 import 'package:cute_weather_v2/repositories/shared_prefs_repository.dart';
 import 'package:cute_weather_v2/screens/search_screen/cubit/search_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -32,11 +32,11 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FloatingSearchBar(
-        hint: AppLocalizations.of(context)!.search,
+        hint: 'search'.tr(),
         onQueryChanged: (query) async {
           await _cubit.findCity(
             query,
-            AppLocalizations.of(context)!.localeName,
+            'localeName'.tr(),
           );
         },
         builder: (context, transition) {

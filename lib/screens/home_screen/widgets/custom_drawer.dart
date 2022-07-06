@@ -1,6 +1,6 @@
 import 'package:cute_weather_v2/screens/home_screen/widgets/theme_switcher.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -23,14 +23,14 @@ class CustomDrawer extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(AppLocalizations.of(context)!.darkTheme),
+                Text('darkTheme'.tr()),
                 const ThemeSwitcher(),
               ],
             ),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: Text('${AppLocalizations.of(context)!.createdBy}: @iridiscenthummingbird'),
+                child: Text('${'createdBy'.tr()}: @iridiscenthummingbird'),
               ),
             ),
             const SizedBox(

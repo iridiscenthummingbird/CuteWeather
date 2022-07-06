@@ -1,23 +1,23 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 String windDeg(double deg, BuildContext context) {
   if (deg >= 22.5 && deg < 67.5) {
-    return AppLocalizations.of(context)!.sw;
+    return 'sw'.tr();
   } else if (deg >= 67.5 && deg < 112.5) {
-    return AppLocalizations.of(context)!.w;
+    return 'w'.tr();
   } else if (deg >= 112.5 && deg < 157.5) {
-    return AppLocalizations.of(context)!.nw;
+    return 'nw'.tr();
   } else if (deg >= 157.5 && deg < 202.5) {
-    return AppLocalizations.of(context)!.n;
+    return 'n'.tr();
   } else if (deg >= 202.5 && deg < 247.5) {
-    return AppLocalizations.of(context)!.ne;
+    return 'ne'.tr();
   } else if (deg >= 247.5 && deg < 292.5) {
-    return AppLocalizations.of(context)!.e;
+    return 'e'.tr();
   } else if (deg >= 292.5 && deg < 337.5) {
-    return AppLocalizations.of(context)!.se;
+    return 'se'.tr();
   } else {
-    return AppLocalizations.of(context)!.s;
+    return 's'.tr();
   }
 }
 

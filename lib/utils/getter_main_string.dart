@@ -1,40 +1,39 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GetterMainString {
   static String getMainString(String main, BuildContext context) {
-    final dictionary = AppLocalizations.of(context)!;
     switch (main) {
       case 'Ash':
-        return dictionary.ash;
+        return 'ash'.tr();
       case 'Clear':
-        return dictionary.clear;
+        return 'clear'.tr();
       case 'Clouds':
-        return dictionary.clouds;
+        return 'clouds'.tr();
       case 'Drizzle':
-        return dictionary.drizzle;
+        return 'drizzle'.tr();
       case 'Dust':
-        return dictionary.dust;
+        return 'dust'.tr();
       case 'Fog':
-        return dictionary.fog;
+        return 'fog'.tr();
       case 'Haze':
-        return dictionary.haze;
+        return 'haze'.tr();
       case 'Mist':
-        return dictionary.mist;
+        return 'mist'.tr();
       case 'Rain':
-        return dictionary.rain;
+        return 'rain'.tr();
       case 'Sand':
-        return dictionary.sand;
+        return 'sand'.tr();
       case 'Smoke':
-        return dictionary.smoke;
+        return 'smoke'.tr();
       case 'Snow':
-        return dictionary.snow;
+        return 'snow'.tr();
       case 'Squall':
-        return dictionary.squall;
+        return 'squall'.tr();
       case 'Thunderstorm':
-        return dictionary.thunderstorm;
+        return 'thunderstorm'.tr();
       case 'Tornado':
-        return dictionary.tornado;
+        return 'tornado'.tr();
       default:
         throw UnimplementedError('MainStringError');
     }

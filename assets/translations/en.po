@@ -1,0 +1,162 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: en.json conversion\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-07 14:32+0300\n"
+"PO-Revision-Date: 2022-07-07 14:32+0300\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Api-Version: 1.0.26 20220703-1"
+
+msgid "helloWorld"
+msgstr "Hello World!"
+
+msgid "thunderstorm"
+msgstr "Thunderstorm"
+
+msgid "drizzle"
+msgstr "Drizzle"
+
+msgid "rain"
+msgstr "Rain"
+
+msgid "snow"
+msgstr "Snow"
+
+msgid "mist"
+msgstr "Mist"
+
+msgid "smoke"
+msgstr "Smoke"
+
+msgid "haze"
+msgstr "Haze"
+
+msgid "dust"
+msgstr "Dust"
+
+msgid "fog"
+msgstr "Fog"
+
+msgid "sand"
+msgstr "Sand"
+
+msgid "ash"
+msgstr "Ash"
+
+msgid "squall"
+msgstr "Squall"
+
+msgid "tornado"
+msgstr "Tornado"
+
+msgid "clear"
+msgstr "Clear"
+
+msgid "clouds"
+msgstr "Clouds"
+
+msgid "feelsLike"
+msgstr "feels like"
+
+msgid "hourlyForecast"
+msgstr "Hourly forecast"
+
+msgid "dailyForecast"
+msgstr "Daily forecast"
+
+msgid "windAndPressure"
+msgstr "Wind and pressure"
+
+msgid "details"
+msgstr "Details"
+
+msgid "humidity"
+msgstr "Humidity"
+
+msgid "uvIndex"
+msgstr "UV-index"
+
+msgid "visibility"
+msgstr "Visibility"
+
+msgid "dewPoint"
+msgstr "Dew point"
+
+msgid "search"
+msgstr "Search..."
+
+msgid "highTemp"
+msgstr "High"
+
+msgid "lowTemp"
+msgstr "Low"
+
+msgid "pressure"
+msgstr "Pressure"
+
+msgid "mbar"
+msgstr "mbar"
+
+msgid "ms"
+msgstr "m/s"
+
+msgid "km"
+msgstr "km"
+
+msgid "low"
+msgstr "Low"
+
+msgid "moderate"
+msgstr "Moderate"
+
+msgid "high"
+msgstr "High"
+
+msgid "veryHigh"
+msgstr "Very high"
+
+msgid "extreme"
+msgstr "Extreme"
+
+msgid "sw"
+msgstr "SW"
+
+msgid "w"
+msgstr "W"
+
+msgid "nw"
+msgstr "NW"
+
+msgid "n"
+msgstr "N"
+
+msgid "ne"
+msgstr "NE"
+
+msgid "e"
+msgstr "E"
+
+msgid "se"
+msgstr "SE"
+
+msgid "s"
+msgstr "S"
+
+msgid "nBeauforts"
+msgid_plural "nBeauforts.other"
+msgstr[0] "{count} Beaufort"
+msgstr[1] "{count} Beauforts"
+
+msgid "darkTheme"
+msgstr "Dark Theme"
+
+msgid "createdBy"
+msgstr "Created by"
